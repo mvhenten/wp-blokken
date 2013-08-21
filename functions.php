@@ -72,9 +72,6 @@ function blokken_setup() {
 	// Adds RSS feed links to <head> for posts and comments.
 	add_theme_support( 'automatic-feed-links' );
 
-	// Switches default core markup for search form, comment form, and comments
-	// to output valid HTML5.
-	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
 
 	/*
 	 * This theme supports all available post formats by default.
@@ -148,31 +145,9 @@ function blokken_fonts_url() {
  * @return void
  */
 function blokken_scripts_styles() {
-	// Adds JavaScript to pages with the comment form to support sites with
-	// threaded comments (when in use).
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-
-	// Adds Masonry to handle vertical alignment of footer widgets.
-	if ( is_active_sidebar( 'sidebar-1' ) )
-		wp_enqueue_script( 'jquery-masonry' );
-
-	// Loads JavaScript file with functionality specific to Blokken.
-	wp_enqueue_script( 'blokken-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '2013-07-18', true );
-
-	// Add Open Sans and Bitter fonts, used in the main stylesheet.
-	wp_enqueue_style( 'blokken-fonts', blokken_fonts_url(), array(), null );
-
-	// Add Genericons font, used in the main stylesheet.
-	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/fonts/genericons.css', array(), '2.09' );
-
-	// Loads our main stylesheet.
 	wp_enqueue_style( 'blokken-style', get_stylesheet_uri(), array(), '2013-07-18' );
-
-	// Loads the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'blokken-ie', get_template_directory_uri() . '/css/ie.css', array( 'blokken-style' ), '2013-07-18' );
-	wp_style_add_data( 'blokken-ie', 'conditional', 'lt IE 9' );
 }
+
 add_action( 'wp_enqueue_scripts', 'blokken_scripts_styles' );
 
 /**
