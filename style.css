@@ -54,7 +54,9 @@ h4 {
 }
 
 
-.searchform {
+.searchform,
+#searchform
+{
 	width: 99%;
 	background: #fff;
 	border: solid 1px #e7e7e7;
@@ -63,7 +65,9 @@ h4 {
 	overflow: auto;
 }
 
-.searchform input[type="submit"] {
+.searchform input[type="submit"],
+#searchform input[type="submit"]
+{
 	width: 33px;
 	height: 33px;
 	float: right;
@@ -80,7 +84,9 @@ h4 {
 	line-height: 0;
 }
 
-.searchform input[type="text"] {
+.searchform input[type="text"],
+#searchform input[type="text"]
+{
 	width: 78%;
 	float: left;
 	padding: 6px 0 6px 11px;
