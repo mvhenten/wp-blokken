@@ -51,13 +51,25 @@ get_header(); ?>
 				<?php if( ! ( is_single() || is_page() ) ): ?>
 				<div id="tag-filter">
 					<?php $tags = get_tags(); ?>
-					<?php foreach( $tags as $tag ): ?>
-						<a class="tag-item" href="?tag=<?php echo $tag->slug ?>"><?php echo $tag->name ?></a>
-					<?php endforeach; ?>
+					<form method="get">
+                        <fieldset>
+                            <legend><span onclick="$('.form-body,.form-controls').toggle()" area-hidden="true" class="toggle-display">hide</span> category filter</legend>
+                            <div class="form-body">
+                            <?php foreach( $tags as $tag ): ?>
+                            <label for="filter-tag-<?php echo $tag->slug ?>">
+                                <input <?php if(is_tag( $tag->slug )):?>checked="true"<?php endif; ?> id="filter-tag-<?php echo $tag->slug ?>" type="radio" name="tag" value="<?php echo $tag->slug ?>" /> <?php echo $tag->name ?></a>
+                            </label>
+                            <?php endforeach; ?>
+                            </div>
+                            <div class="form-controls">
+                                <input type="reset" value="clear" onclick="document.location.href='/'; return false;" /><input type="submit" value="filter" />
+                            </div>
+                        </fieldset>
+					</form>
 				</div>
 				<?php endif; ?>
 				<?php while ( have_posts() ) : the_post(); ?>
-					<div class="row">
+					<div class="row entry">
 						<div class="col-md-9">
 							<h4 class="entry-title">
 								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -74,7 +86,10 @@ get_header(); ?>
 							</div><!-- .entry-content -->
 							<?php endif; ?>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-3 post-meta">
+                            <div class="date">
+                                <?php echo get_the_date(); ?>
+                            </div>
 							<div class="post-tag-list">
 								<?php the_tags('Tags:', ', ', '<br />'); ?>
 							</div>
@@ -90,5 +105,7 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
+
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 
 <?php get_footer(); ?>

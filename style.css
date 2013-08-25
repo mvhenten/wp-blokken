@@ -14,14 +14,13 @@ Text Domain: blokken
 
 body {
 	font: 11px/21px 'Open Sans', sans-serif;
-background-color: whitesmoke;
+	background-color: whitesmoke;
 }
 
 h4 {
 	font-size: 12px;
 	line-height: 24px;
 	margin: 0 0 20px;
-	padding: 50px 0 0 0;
 	font-weight: bold;
 	text-transform: uppercase;
 
@@ -29,24 +28,23 @@ h4 {
 	word-wrap: break-word;
 }
 
+.post-meta {
+	font-size: 90%;
+}
+
 .menu-item {
 	text-transform: uppercase;
 	padding: 20px 0;
 }
 
+.entry {
+	padding: 0 0 1em;
+	margin: 0 0 1em;
+	border-bottom: 1px solid white;
+}
+
 #header {
 	margin-bottom: 40px;
-}
-
-#tag-filter {
-	padding: 2em 1em;
-	margin: 0  0 2em 0;
-	border: 1px solid silver;
-}
-
-#tag-filter a {
-	display: inline-block;
-	margin-right: 0.5em;
 }
 
 .screen-reader-text {
@@ -96,12 +94,73 @@ h4 {
 }
 
 .post-tag-list {
-	background-color: #eee;
+	padding: 1em 0;
 }
-#menu-main-menu .menu-item a{
-background-color:khaki;
-padding:0 20px 0 20px;
-border-radius: 0;
-color: white;
-line-height: 18px;
+
+#menu .menu-item a{
+	background-color: #00bbd6;
+	padding:0 20px 0 20px;
+	border-radius: 0;
+	color: white;
+	line-height: 18px;
+}
+
+#tag-filter {
+	margin: 0  0 2em 0;
+}
+
+#tag-filter .form-body {
+	padding: 1em 0;
+	background-color: #fff;
+	overflow:hidden;
+}
+
+
+#tag-filter label {
+	line-height: 2.2em;
+	cursor: pointer;
+	float: left;
+	width: 30%;
+
+	margin-left: 3%;
+}
+
+#tag-filter label input {
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0;
+}
+
+#tag-filter legend {
+	margin:0;
+	padding: 0 0.5em;
+	border: 1px solid white;
+	background-color: #dfe5e5;
+	color: #00bbd6;
+	text-transform: uppercase;
+	font-size: inherit;
+}
+
+#tag-filter .toggle-display {
+	color: white;
+}
+
+#tag-filter .form-controls {
+	text-align: right;
+}
+
+#tag-filter .form-controls input {
+	text-transform: uppercase;
+	background: white;
+	padding: 0 1em;
+	color: #00bbd6;
+	border: 1px solid #dfe5e5;
+	margin: 0;
+}
+
+#tag-filter .form-controls input[type="reset"] {
+	background: #dfe5e5;
+	color: gray;
+	border: 1px solid white;
+	margin: 0;
 }
