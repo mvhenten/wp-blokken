@@ -18,11 +18,12 @@ body {
 }
 
 h4 {
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 24px;
 	margin: 0 0 20px;
 	font-weight: bold;
 	text-transform: uppercase;
+	padding: 20px 0 0 0;
 
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
@@ -43,6 +44,11 @@ h4 {
 	border-bottom: 1px solid white;
 }
 
+.entry-content img {
+	margin-bottom: 4px;
+	border: 0.7em solid white;
+}
+
 #header {
 	margin-bottom: 40px;
 }
@@ -57,9 +63,9 @@ h4 {
 {
 	width: 99%;
 	background: #fff;
-	border: solid 1px #e7e7e7;
-	padding: 0px;
-	margin: 1em 0;
+	border: 0;
+	padding: 1px 5px 0px 0;
+	margin: 50px 0px 0px -2px;
 	overflow: auto;
 }
 
@@ -98,10 +104,10 @@ h4 {
 }
 
 #menu .menu-item a{
-	background-color: #00bbd6;
+	background-color: white;
 	padding:0 20px 0 20px;
 	border-radius: 0;
-	color: white;
+	color: #708090;
 	line-height: 18px;
 }
 
@@ -117,32 +123,46 @@ h4 {
 
 
 #tag-filter label {
-	line-height: 2.2em;
+	line-height: 1.6em;
 	cursor: pointer;
 	float: left;
 	width: 30%;
+	color: rgb(112, 128, 144);
+	font-weight: normal;
 
 	margin-left: 3%;
 }
 
+#tag-filter label:hover {
+	color: black;
+
+}
+
+#tag-filter label.active {
+	color: black;
+
+}
+
+
 #tag-filter label input {
 	vertical-align: middle;
-	display: inline-block;
+	display: none;
 	margin: 0;
 }
 
 #tag-filter legend {
 	margin:0;
 	padding: 0 0.5em;
-	border: 1px solid white;
-	background-color: #dfe5e5;
-	color: #00bbd6;
+	border: 2px solid white;
+	background-color: #B0E0E6;
+	color: #708090;
 	text-transform: uppercase;
 	font-size: inherit;
 }
 
 #tag-filter .toggle-display {
 	color: white;
+	cursor: pointer;
 }
 
 #tag-filter .form-controls {
@@ -152,15 +172,14 @@ h4 {
 #tag-filter .form-controls input {
 	text-transform: uppercase;
 	background: white;
-	padding: 0 1em;
-	color: #00bbd6;
-	border: 1px solid #dfe5e5;
+	padding: 2px 1em;
+	color: #B0E0E6;
+	border: 1px solid white;
 	margin: 0;
 }
 
 #tag-filter .form-controls input[type="reset"] {
-	background: #dfe5e5;
-	color: gray;
-	border: 1px solid white;
+	background: #708090;
+	color: white;
 	margin: 0;
 }
