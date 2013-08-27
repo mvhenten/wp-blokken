@@ -81,6 +81,29 @@ function blokken_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu( 'primary', __( 'Navigation Menu', 'blokken' ) );
 
+
+	$args = array(
+		'default-image'          => '',
+
+		// Set height and width, with a maximum value for the width.
+		'height'                 => 100,
+		'width'                  => 940,
+		'max-width'              => 940,
+
+		// Support flexible height and width.
+		'flex-height'            => true,
+		'flex-width'             => true,
+
+		// Random image rotation off by default.
+		'random-default'         => false,
+	);
+
+	add_theme_support( 'custom-header', $args );
+
+	add_theme_support( 'custom-background', array(
+		'default-color' => 'e6e6e6',
+	) );
+
 	/*
 	 * This theme uses a custom image size for featured images, displayed on
 	 * "standard" posts and pages.
