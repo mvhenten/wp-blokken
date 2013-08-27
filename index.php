@@ -91,7 +91,7 @@ get_header(); ?>
                                 <?php echo get_the_date(); ?>
                             </div>
 							<div class="post-tag-list">
-                                <?php the_tags('<div>','</div><div>','<div>'); ?>
+                                <?php the_tags('<div>','</div><div>','</div>'); ?>
 							</div>
 							<br/>
 							<?php edit_post_link( __( 'Edit', 'blokken' ), '<span class="edit-link">', '</span>' ); ?>
