@@ -11,7 +11,20 @@
  */
 ?>
 
+<script>
+(function(){
+	var selector = '#tag-filter label';
+
+	$(selector).click(function(){ 
+		$(selector).removeClass('active'); 
+		$(this).addClass('active'); 
+	});
+})();
+
+
+</script>
 
 	<?php wp_footer(); ?>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </body>
 </html>
