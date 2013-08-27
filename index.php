@@ -94,7 +94,7 @@ get_header(); ?>
                                 <?php the_tags('<div>','</div><div>','</div>'); ?>
 							</div>
 							<br/>
-							<?php edit_post_link( __( 'Edit', 'blokken' ), '<span class="edit-link btn btn-success">', '</span>' ); ?>
+							<?php edit_post_link( __( 'Edit', 'blokken' ), '<span class="edit-link">', '</span>' ); ?>
 						</div>
 					</div>
 				<?php endwhile; ?>
