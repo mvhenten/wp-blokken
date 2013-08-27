@@ -23,7 +23,7 @@ h4 {
 	margin: 0 0 20px;
 	font-weight: bold;
 	text-transform: uppercase;
-	padding: 20px 0 0 0;
+	padding: 0px 0 0 0;
 
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
@@ -33,6 +33,16 @@ h4 {
 	font-size: 90%;
 }
 
+.post-meta .date {
+ 	border-bottom: 1px solid white;
+	color: #333;
+}
+
+.post-meta .post-tag-list {
+ 	border-bottom: 1px solid white;
+	color: #333;
+}
+
 .menu-item {
 	text-transform: uppercase;
 	padding: 20px 0;
@@ -40,7 +50,7 @@ h4 {
 
 .entry {
 	padding: 0 0 1em;
-	margin: 0 0 1em;
+	margin: 0 0 3em;
 	border-bottom: 1px solid white;
 }
 
