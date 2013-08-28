@@ -11,20 +11,29 @@
  */
 ?>
 
+<?php wp_footer(); ?>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
 (function(){
-	var selector = '#tag-filter label';
+	var tags = function(){
+		var values = $( '#tag-filter input' ).filter(':checked').map(function(i,el){
+			return $(el).val();
+		});
 
-	$(selector).click(function(){ 
-		$(selector).removeClass('active'); 
-		$(this).addClass('active'); 
+		return values.toArray().join(',');
+	};
+
+
+	$('#tag-filter label').click(function(){
+		$(this).toggleClass('active');
 	});
+
+	$('#tag-filter input').change(function(){
+		$('#filter-tags').val( tags() );
+	});
+
+	$('#filter-tags').val( tags() );
 })();
-
-
 </script>
-
-	<?php wp_footer(); ?>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </body>
 </html>

@@ -55,9 +55,15 @@ get_header(); ?>
                         <fieldset>
                             <legend><span onclick="$('.form-body,.form-controls').toggle()" area-hidden="true" class="toggle-display">hide</span> category filter</legend>
                             <div class="form-body">
+                            <?php
+                                $checked = isset( $_GET['tag'] ) ? explode(',', $_GET['tag'] ) : array();
+                                $checked = array_fill_keys( $checked, 'checked="checked"' );
+                            ?>
+
                             <?php foreach( $tags as $tag ): ?>
-                            <label for="filter-tag-<?php echo $tag->slug ?>">
-                                <input <?php if(is_tag( $tag->slug )):?>checked="true"<?php endif; ?> id="filter-tag-<?php echo $tag->slug ?>" type="radio" name="tag" value="<?php echo $tag->slug ?>" /> <?php echo $tag->name ?></a>
+                            <input style="display:none;" <?php echo isset( $checked[$tag->slug] ) ? $checked[$tag->slug] : '' ?> id="filter-tag-<?php echo $tag->slug ?>" type="checkbox" value="<?php echo $tag->slug ?>" />
+                            <label for="filter-tag-<?php echo $tag->slug ?>" class="<?php echo isset( $checked[$tag->slug] ) ? 'active' : ''; ?>">
+                                <?php echo $tag->name ?>
                             </label>
                             <?php endforeach; ?>
                             </div>
@@ -65,10 +71,23 @@ get_header(); ?>
                                 <input type="reset" value="clear" onclick="document.location.href='/'; return false;" /><input type="submit" value="filter" />
                             </div>
                         </fieldset>
+                        <input id="filter-tags" value="" name="tag" type="hidden" />
 					</form>
 				</div>
 				<?php endif; ?>
 				<?php while ( have_posts() ) : the_post(); ?>
+                    <?php $type = get_post_type( get_the_ID() ); ?>
+
+                    <?php if( $type == 'blokken_quote' ): ?>
+					<div class="row entry quote">
+						<div class="col-md-9">
+							<h4 class="entry-title">
+								<a href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a>
+							</h4>
+                        </div>
+                    </div>
+                    <?php continue; endif;?>
+
 					<div class="row entry">
 						<div class="col-md-9">
 							<h4 class="entry-title">

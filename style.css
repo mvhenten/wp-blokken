@@ -54,6 +54,17 @@ h4 {
 	border-bottom: 1px solid white;
 }
 
+.quote h4 {
+	background-color: #fff;
+	display: inline;
+	font-size: 3em;
+}
+
+.quote h4 a:hover {
+	text-decoration:none;
+}
+
+
 .entry-content img {
 	margin-bottom: 4px;
 	border: 0.7em solid white;

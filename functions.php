@@ -2,81 +2,86 @@
 /**
  * Blokken functions and definitions.
  *
- * Sets up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * When using a child theme (see http://codex.wordpress.org/Theme_Development
- * and http://codex.wordpress.org/Child_Themes), you can override certain
- * functions (those wrapped in a function_exists() call) by defining them first
- * in your child theme's functions.php file. The child theme's functions.php
- * file is included before the parent theme's file, so the child theme
- * functions would be used.
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are
- * instead attached to a filter or action hook.
- *
- * For more information on hooks, actions, and filters,
- * see http://codex.wordpress.org/Plugin_API
- *
- * @package WordPress
- * @subpackage Twenty_Thirteen
+ * @package Blokken
  * @since Blokken 1.0
  */
 
-/**
- * Sets up the content width value based on the theme's design.
- * @see blokken_content_width() for template-specific adjustments.
- */
-if ( ! isset( $content_width ) )
-	$content_width = 604;
 
-/**
- * Adds support for a custom header image.
- */
-//require get_template_directory() . '/inc/custom-header.php';
+add_action( 'init', 'blokken_create_post_type' );
+
+function blokken_create_post_type() {
+	register_post_type( 'blokken_quote',
+
+		array(
+			'labels' => array(
+				'name' => __( 'Quotes' ),
+				'singular_name' => __( 'Quote' )
+			),
+            'public' => true,
+            'has_archive' => true,
+            'supports' => array('title'),
+            'taxonomies' => array('post_tag')
+		)
+	);
+}
+
+function blokken_add_custom_box() {
+   $screens = array( 'blokken_quote' );
+
+    foreach ( $screens as $screen ) {
+
+        add_meta_box(
+            'blokken_quote_link',
+            __( 'Quote link', 'blokken_textdomain' ),
+            'blokken_quote_field_html',
+            $screen
+        );
+    }
+}
+
+add_action( 'add_meta_boxes', 'blokken_add_custom_box' );
+
+function blokken_quote_field_html( $post ) {
+
+  /*
+   * Use get_post_meta to retrieve an existing value
+   * from the database and use the value for the form.
+   */
+  $value = get_post_meta( $post->ID, '_blokken_quote_link', true );
+
+  echo '<label for="blokken_quote_field">';
+       _e("Edit the url this quote refers to:", 'blokken_textdomain' );
+  echo '</label><br/>';
+  echo '<input size="75" placeholder="http://example.com" type="text" id="blokken_quote_field" name="blokken_quote_field" value="' . esc_attr( $value ) . '" size="25" />';
+
+}
+
+function blokken_save_postdata( $post_id ) {
+    if( isset( $_POST['blokken_quote_field'] ) ){
+        // IMPORTANT! Sanitize user input.
+        $mydata = sanitize_text_field( $_POST['blokken_quote_field'] );
+
+        // Update the meta field in the database.
+        update_post_meta( $post_id, '_blokken_quote_link', $mydata );
+    }
+}
+
+add_action( 'save_post', 'blokken_save_postdata' );
 
 
-/**
- * Sets up theme defaults and registers the various WordPress features that
- * Blokken supports.
- *
- * @uses load_theme_textdomain() For translation/localization support.
- * @uses add_editor_style() To add Visual Editor stylesheets.
- * @uses add_theme_support() To add support for automatic feed links, post
- * formats, and post thumbnails.
- * @uses register_nav_menu() To add support for a navigation menu.
- * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
- *
- * @since Blokken 1.0
- *
- * @return void
- */
+function blokken_add_quotes_to_query( $query ) {
+	if ( $query->is_main_query() ){
+		$query->set( 'post_type', array( 'post', 'blokken_quote' ) );
+	}
+
+	return $query;
+}
+
+add_action( 'pre_get_posts', 'blokken_add_quotes_to_query' );
+
 function blokken_setup() {
-	/*
-	 * Makes Blokken available for translation.
-	 *
-	 * Translations can be added to the /languages/ directory.
-	 * If you're building a theme based on Blokken, use a find and
-	 * replace to change 'blokken' to the name of your theme in all
-	 * template files.
-	 */
-	load_theme_textdomain( 'blokken', get_template_directory() . '/languages' );
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
-	add_editor_style( array( 'css/editor-style.css', 'fonts/genericons.css', blokken_fonts_url() ) );
-
 	// Adds RSS feed links to <head> for posts and comments.
 	add_theme_support( 'automatic-feed-links' );
-
-
-	/*
-	 * This theme supports all available post formats by default.
-	 * See http://codex.wordpress.org/Post_Formats
-	 */
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu( 'primary', __( 'Navigation Menu', 'blokken' ) );
@@ -109,56 +114,15 @@ function blokken_setup() {
 	 * "standard" posts and pages.
 	 */
 	add_theme_support( 'post-thumbnails' );
+
 	set_post_thumbnail_size( 604, 270, true );
 
 	// This theme uses its own gallery styles.
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
+
 add_action( 'after_setup_theme', 'blokken_setup' );
 
-/**
- * Returns the Google font stylesheet URL, if available.
- *
- * The use of Source Sans Pro and Bitter by default is localized. For languages
- * that use characters not supported by the font, the font can be disabled.
- *
- * @since Blokken 1.0
- *
- * @return string Font stylesheet or empty string if disabled.
- */
-function blokken_fonts_url() {
-	$fonts_url = '';
-
-	/* Translators: If there are characters in your language that are not
-	 * supported by Source Sans Pro, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$source_sans_pro = _x( 'on', 'Source Sans Pro font: on or off', 'blokken' );
-
-	/* Translators: If there are characters in your language that are not
-	 * supported by Bitter, translate this to 'off'. Do not translate into your
-	 * own language.
-	 */
-	$bitter = _x( 'on', 'Bitter font: on or off', 'blokken' );
-
-	if ( 'off' !== $source_sans_pro || 'off' !== $bitter ) {
-		$font_families = array();
-
-		if ( 'off' !== $source_sans_pro )
-			$font_families[] = 'Source Sans Pro:300,400,700,300italic,400italic,700italic';
-
-		if ( 'off' !== $bitter )
-			$font_families[] = 'Bitter:400,700';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-		$fonts_url = add_query_arg( $query_args, "//fonts.googleapis.com/css" );
-	}
-
-	return $fonts_url;
-}
 
 /**
  * Enqueues scripts and styles for front end.
@@ -175,43 +139,11 @@ function blokken_scripts_styles() {
 
 	wp_enqueue_style( 'blokken-style', get_stylesheet_uri(), array(), '2013-07-18' );
 
-	wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.js' );
+//	wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.js' );
 
 }
 
 add_action( 'wp_enqueue_scripts', 'blokken_scripts_styles' );
-
-/**
- * Creates a nicely formatted and more specific title element text for output
- * in head of document, based on current view.
- *
- * @since Blokken 1.0
- *
- * @param string $title Default title text for current view.
- * @param string $sep Optional separator.
- * @return string The filtered title.
- */
-//function blokken_wp_title( $title, $sep ) {
-//	global $paged, $page;
-//
-//	if ( is_feed() )
-//		return $title;
-//
-//	// Add the site name.
-//	$title .= get_bloginfo( 'name' );
-//
-//	// Add the site description for the home/front page.
-//	$site_description = get_bloginfo( 'description', 'display' );
-//	if ( $site_description && ( is_home() || is_front_page() ) )
-//		$title = "$title $sep $site_description";
-//
-//	// Add a page number if necessary.
-//	if ( $paged >= 2 || $page >= 2 )
-//		$title = "$title $sep " . sprintf( __( 'Page %s', 'blokken' ), max( $paged, $page ) );
-//
-//	return $title;
-//}
-//add_filter( 'wp_title', 'blokken_wp_title', 10, 2 );
 
 /**
  * Registers two widget areas.
@@ -262,20 +194,20 @@ add_theme_support( 'custom-header', $args );
  * @param WP_Customize_Manager $wp_customize Customizer object.
  * @return void
  */
-function blokken_customize_register( $wp_customize ) {
-	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-}
-add_action( 'customize_register', 'blokken_customize_register' );
+//function blokken_customize_register( $wp_customize ) {
+//	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
+//	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+//	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+//}
+//add_action( 'customize_register', 'blokken_customize_register' );
 
-/**
- * Binds JavaScript handlers to make Customizer preview reload changes
- * asynchronously.
- *
- * @since Blokken 1.0
- */
-function blokken_customize_preview_js() {
-	wp_enqueue_script( 'blokken-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
-}
-add_action( 'customize_preview_init', 'blokken_customize_preview_js' );
+///**
+// * Binds JavaScript handlers to make Customizer preview reload changes
+// * asynchronously.
+// *
+// * @since Blokken 1.0
+// */
+//function blokken_customize_preview_js() {
+//	wp_enqueue_script( 'blokken-customizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'customize-preview' ), '20130226', true );
+//}
+//add_action( 'customize_preview_init', 'blokken_customize_preview_js' );
