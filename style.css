@@ -11,10 +11,28 @@ Tags: black, brown, orange, tan, white, yellow, light, one-column, two-columns, 
 Text Domain: blokken
 */
 
+@include('css/normalize.css');
+
 
 body {
 	font: 11px/21px 'Open Sans', sans-serif;
 	background-color: whitesmoke;
+	background-size: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+fieldset, legend {
+	border: none;
+	margin:0;
+	padding:0;
+}
+
+button, input {
+	font: inherit;
 }
 
 h4 {
@@ -27,6 +45,78 @@ h4 {
 
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
+}
+
+/** layout dont touch it **/
+
+.layout-container {
+	max-width: 1024px;
+	min-width: 766px;
+	overflow: hidden;
+	margin:auto;
+}
+
+.col {
+	float: left;
+}
+
+.col-25 {
+	width: 30%;
+}
+
+.col-75 {
+	width: 70%;
+}
+
+.col-30 {
+	width: 30%;
+}
+
+.col-70 {
+	width: 70%;
+}
+
+.col-pad-right {
+	padding-right: 7em;
+}
+
+.col-pad-left {
+	padding-left: 7em;
+}
+
+/** end layout **/
+
+.blokken-search input {
+	color: #6dcedf;
+	display: block;
+	border: 1px solid silver;
+	text-transform: uppercase;
+	margin: 2em 0;
+	padding: 0 1em;
+	width: 90%;
+	height:25px;
+
+}
+
+.blokken-search .input-submit {
+	display:none;
+}
+
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
+	color: #6dcedf;
+}
+
+
+hr.post-separator {
+	margin: 0 0 3em;
+	color: white;
+	background-color: white;
+	border: none;
+	height: 1px;
+	clear:both;
 }
 
 .post-meta {
@@ -49,15 +139,29 @@ h4 {
 }
 
 .entry {
-	padding: 0 0 1em;
 	margin: 0 0 3em;
-	border-bottom: 1px solid white;
+}
+
+/**
+ * @silke dit is een ontzettende hack.
+ */
+.quote {
+	border-left: 5px solid white;
+	overflow:hidden;
 }
 
 .quote h4 {
 	background-color: #fff;
 	display: inline;
+
+	padding: 0.5em 0;
 	font-size: 2em;
+	line-height: 1.8em;
+	white-space:pre-wrap;
+	border-right: 10px solid white;
+
+	color: #999;
+	word-spacing: 0.5em;
 }
 
 .quote h4 a:hover {
@@ -124,12 +228,21 @@ h4 {
 	padding: 1em 0;
 }
 
+#menu {
+	text-align: right;
+}
+
 #menu .menu-item a{
 	background-color: orange;
 	padding:0 20px 0 20px;
 	border-radius: 0;
 	color: white;
 	line-height: 15px;
+}
+
+.menu-item li {
+	display: inline;
+	list-style: none;
 }
 
 #tag-filter {
@@ -203,9 +316,4 @@ h4 {
 	background: #708090;
 	color: white;
 	margin: 0;
-}
-
-#col-md-3 .post-meta {
-	padding-right: 0px;
-	padding-top: 15px;
 }

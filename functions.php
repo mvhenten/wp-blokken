@@ -132,15 +132,8 @@ add_action( 'after_setup_theme', 'blokken_setup' );
  * @return void
  */
 function blokken_scripts_styles() {
-	// Add Genericons font, used in the main stylesheet.
-	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css', array(), '3.0.0' );
-
-	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap-theme.css', array(), '3.0.0' );
 
 	wp_enqueue_style( 'blokken-style', get_stylesheet_uri(), array(), '2013-07-18' );
-
-//	wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.js' );
-
 }
 
 add_action( 'wp_enqueue_scripts', 'blokken_scripts_styles' );

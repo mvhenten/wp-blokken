@@ -15,13 +15,13 @@
  */
 
 get_header(); ?>
-<div class="container" id="header">
+<div class="layout-container" id="header">
 	<div class="row" id="brand">
 		<div class="col-md-12 col-sm-6" id="menu">
 			<?php wp_nav_menu( array(
 				'theme_location' => 'primary',
-				'container' => 'nav',
-				'menu_class' => 'nav nav-pills pull-right',
+				'container' => 'main-menu',
+				'menu_class' => 'menu-item',
 				'container_class' => 'row' )
 			); ?>
 		</div>
@@ -43,15 +43,37 @@ get_header(); ?>
 	</div>
 </div>
 
-<div class="container" id="content">
-	<div class="row">
-		<div class="col-md-8 col-md-push-4">
-			<?php if ( have_posts() ) : ?>
-				<?php /* The loop */ ?>
-				<?php if( ! ( is_single() || is_page() ) ): ?>
-				<div id="tag-filter">
-					<?php $tags = get_tags(); ?>
-					<form method="get">
+<div class="layout-container" id="content">
+    <div class="col col-25">
+        <div class="col-pad-right">
+            <?php dynamic_sidebar( 'sidebar-2' ); ?>
+            <form role="search" method="get" class="blokken-search" action="http://jonmar.localhost/">
+				<div>
+					<input class="input-text" type="text" value="" name="s" id="s" placeholder="Search. then hit enter">
+					<input class="input-submit" type="submit" value="Search">
+				</div>
+			</form>
+        </div>
+    </div>
+
+    <div class="col col-75">
+        <?php if(! have_posts() ): ?>
+            <div class="col col-70">
+                <div class="entry">
+                    <div class="quote">
+                        <h4 class="entry-title"><a target="_blank" href="http://encrypted.google.com">I have climbed highest mountains I have run through the fields <br/>But I still haven't found what I'm looking for...</a></h4>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if ( have_posts() ) : ?>
+            <?php /* The loop */ ?>
+            <?php if( ! ( is_single() || is_page() ) ): ?>
+            <div class="col col-70">
+                <div id="tag-filter">
+                    <?php $tags = get_tags(); ?>
+                    <form method="get">
                         <fieldset>
                             <legend><span onclick="$('.form-body,.form-controls').toggle()" area-hidden="true" class="toggle-display">hide</span> category filter</legend>
                             <div class="form-body">
@@ -72,59 +94,57 @@ get_header(); ?>
                             </div>
                         </fieldset>
                         <input id="filter-tags" value="" name="tag" type="hidden" />
-					</form>
-				</div>
-				<?php endif; ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-                    <?php $type = get_post_type( get_the_ID() ); ?>
+                    </form>
+                </div>
+            </div>
+            <?php endif; ?>
+            <?php while ( have_posts() ) : the_post(); ?>
+                <?php $type = get_post_type( get_the_ID() ); ?>
 
+                <div class="col col-70">
+                    <div class="entry">
                     <?php if( $type == 'blokken_quote' ): ?>
-					<div class="row entry quote">
-						<div class="col-md-9">
-							<h4 class="entry-title">
-								<a target="_blank" href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a>
-							</h4>
+                        <div class="quote">
+                            <h4 class="entry-title"><a target="_blank" href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>
                         </div>
+                    <?php else: ?>
+                        <h4 class="entry-title">
+                            <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+                        </h4>
+
+                        <?php if ( is_search() ) : // Only display Excerpts for Search ?>
+                        <div class="entry-summary">
+                            <?php the_excerpt(); ?>
+                        </div><!-- .entry-summary -->
+                        <?php else : ?>
+                        <div class="entry-content">
+                            <?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
+                            <?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
+                        </div><!-- .entry-content -->
+                        <?php endif; ?>
+                    <?php endif;?>
                     </div>
-                    <?php continue; endif;?>
+                </div>
 
-					<div class="row entry">
-						<div class="col-md-9">
-							<h4 class="entry-title">
-								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
-							</h4>
-
-							<?php if ( is_search() ) : // Only display Excerpts for Search ?>
-							<div class="entry-summary">
-								<?php the_excerpt(); ?>
-							</div><!-- .entry-summary -->
-							<?php else : ?>
-							<div class="entry-content">
-								<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
-								<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
-							</div><!-- .entry-content -->
-							<?php endif; ?>
-						</div>
-						<div class="col-md-3 post-meta">
-                            <div class="date">
-                                <?php echo get_the_date(); ?>
-                            </div>
-							<div class="post-tag-list">
-                                <?php the_tags('<div>','</div><div>','</div>'); ?>
-							</div>
-							<br/>
-							<?php edit_post_link( __( 'Edit', 'blokken' ), '<span class="edit-link">', '</span>' ); ?>
-						</div>
-					</div>
-				<?php endwhile; ?>
-			<?php endif; ?>
-		</div>
-		<div class="col-md-3 col-md-pull-8">
-			<?php dynamic_sidebar( 'sidebar-2' ); ?>
-		</div>
-	</div>
+                <div class="col col-30">
+                    <div class="col-pad-left post-meta">
+                        <div class="date">
+                            <?php echo get_the_date(); ?>
+                        </div>
+                        <div class="post-tag-list">
+                            <?php the_tags('<div>','</div><div>','</div>'); ?>
+                        </div>
+                        <br/>
+                        <?php edit_post_link( __( 'Edit', 'blokken' ), '<span class="edit-link">', '</span>' ); ?>
+                    </div>
+                </div>
+                <hr class="post-separator" />
+            <?php endwhile; ?>
+        <?php endif; ?>
+    </div>
 </div>
 
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
 
 <?php get_footer(); ?>
