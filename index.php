@@ -82,7 +82,7 @@ get_header(); ?>
 					<div class="row entry quote">
 						<div class="col-md-9">
 							<h4 class="entry-title">
-								<a href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a>
+								<a target="_blank" href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a>
 							</h4>
                         </div>
                     </div>
