@@ -113,23 +113,35 @@ get_header(); ?>
                         </h4>
 
                         <?php if ( is_search() ) : // Only display Excerpts for Search ?>
-                        <div class="entry-summary">
-                            <?php the_excerpt(); ?>
-                        </div><!-- .entry-summary -->
+							<div class="entry-summary">
+								<?php the_excerpt(); ?>
+							</div><!-- .entry-summary -->
                         <?php else : ?>
-                        <div class="entry-content">
-                            <?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
-                            <?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
-                        </div><!-- .entry-content -->
+							<div class="entry-content">
+								<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
+								<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
+							</div><!-- .entry-content -->
                         <?php endif; ?>
                     <?php endif;?>
                     </div>
+					<?php if( is_single() ): ?>
+						<div class="blokken-comments">
+							<?php comments_template( '', true ); ?>
+						</div>
+					<?php endif; ?>
                 </div>
+
 
                 <div class="col col-30">
                     <div class="col-pad-left post-meta">
                         <div class="date">
                             <?php echo get_the_date(); ?>
+							<?php $count = get_comments_number() ?>
+							<?php if( $count ): ?>
+								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php $count == 1 ? printf('%d comment', $count ) :printf('%d comments', $count ) ?></a>
+							<?php else: ?>
+								<a href="<?php the_permalink(); ?>" rel="bookmark">comment</a>
+							<?php endif; ?>
                         </div>
                         <div class="post-tag-list">
                             <?php the_tags('<div>','</div><div>','</div>'); ?>

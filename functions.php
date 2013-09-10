@@ -19,7 +19,7 @@ function blokken_create_post_type() {
 			),
             'public' => true,
             'has_archive' => true,
-            'supports' => array('title'),
+            'supports' => array('title', 'comments'),
             'taxonomies' => array('post_tag')
 		)
 	);
@@ -70,7 +70,7 @@ add_action( 'save_post', 'blokken_save_postdata' );
 
 
 function blokken_add_quotes_to_query( $query ) {
-	if ( $query->is_main_query() ){
+	if ( is_home() && $query->is_main_query() ){
 		$query->set( 'post_type', array( 'post', 'blokken_quote' ) );
 	}
 
