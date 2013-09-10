@@ -47,9 +47,9 @@ get_header(); ?>
     <div class="col col-25">
         <div class="col-pad-right">
             <?php dynamic_sidebar( 'sidebar-2' ); ?>
-            <form role="search" method="get" class="blokken-search" action="http://jonmar.localhost/">
+            <form role="search" method="get" class="blokken-search" action="/">
 				<div>
-					<input class="input-text" type="text" value="" name="s" id="s" placeholder="Search. then hit enter">
+					<input class="input-text" type="text" value="" name="s" id="s" placeholder="Search. then hit enter.">
 					<input class="input-submit" type="submit" value="Search">
 				</div>
 			</form>

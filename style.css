@@ -22,7 +22,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: inherit;
+	color: rgb(51, 51, 51);
 }
 
 fieldset, legend {
@@ -87,12 +87,12 @@ h4 {
 /** end layout **/
 
 .blokken-search input {
-	color: #6dcedf;
+	color: orange;
 	display: block;
-	border: 1px solid silver;
+	border: 1px solid white;
 	text-transform: uppercase;
 	margin: 2em 0;
-	padding: 0 1em;
+	padding: 3px 1em 1px 5px;
 	width: 90%;
 	height:25px;
 
@@ -128,14 +128,18 @@ hr.post-separator {
 	color: #333;
 }
 
+.post-meta .post-tag-list a {
+	color: rgb(112, 128, 144);
+	font-weight: 600;
+}
+
 .post-meta .post-tag-list {
  	border-bottom: 1px solid white;
-	color: #333;
+	
 }
 
 .menu-item {
 	text-transform: uppercase;
-	padding: 20px 0;
 }
 
 .entry {
@@ -155,12 +159,13 @@ hr.post-separator {
 	display: inline;
 
 	padding: 0.5em 0;
-	font-size: 2em;
-	line-height: 1.8em;
+	font-size: 1.7em;
+	font-style: italic;
+	line-height: 1.4em;
 	white-space:pre-wrap;
 	border-right: 10px solid white;
 
-	color: #999;
+	color: rgb(51, 51, 51);
 	word-spacing: 0.5em;
 }
 
@@ -175,7 +180,8 @@ hr.post-separator {
 }
 
 #header {
-	margin-bottom: 40px;
+	margin-bottom: 10px;
+	padding-bottom: 40px;
 }
 
 .screen-reader-text {
@@ -234,7 +240,7 @@ hr.post-separator {
 
 #menu .menu-item a{
 	background-color: orange;
-	padding:0 20px 0 20px;
+	padding:2px 1em;
 	border-radius: 0;
 	color: white;
 	line-height: 15px;
@@ -246,7 +252,7 @@ hr.post-separator {
 }
 
 #tag-filter {
-	margin: 0  0 2em 0;
+	margin: 0  0 6em 0;
 }
 
 #tag-filter .form-body {
@@ -287,9 +293,9 @@ hr.post-separator {
 #tag-filter legend {
 	margin:0;
 	padding: 0 0.5em;
-	border: 2px solid white;
-	background-color: #d3d3d3;
-	color: #708090;
+	border: 0px solid white;
+	background-color: orange;
+	color: #333333;
 	text-transform: uppercase;
 	font-size: inherit;
 }
@@ -308,12 +314,35 @@ hr.post-separator {
 	background: white;
 	padding: 2px 1em;
 	color: orange;
-	border: 1px solid white;
+	border: 0px solid white;
 	margin: 0;
 }
 
 #tag-filter .form-controls input[type="reset"] {
-	background: #708090;
+	background: #333333;
 	color: white;
 	margin: 0;
 }
+
+.entry-content a {
+	color: rgb(112, 128, 144);
+	font-weight: 600;
+}
+
+.entry-content a:hover {
+	color: rgb (51, 51, 51) ;
+	font-weight: 600;
+	
+}
+
+.blokken-footer {
+	text-align: right;
+	margin: 2em auto;
+}
+
+.blokken-footer a {
+	color: orange;
+	font-style: italic;
+	font-weight: 600;
+}
+

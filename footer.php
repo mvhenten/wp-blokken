@@ -35,5 +35,8 @@
 	$('#filter-tags').val( tags() );
 })();
 </script>
+<div class="layout-container blokken-footer">
+&copy; copyright <?php echo strftime('%Y'); ?> Jonmar van Vlijmen design by <a href="http://portfolio.ischen.nl">ischen</a>
+</div>
 </body>
 </html>
