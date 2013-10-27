@@ -274,12 +274,13 @@ hr.post-separator {
 }
 
 #tag-filter label:hover {
-	color: black;
+	color: orange;
 
 }
 
+
 #tag-filter label.active {
-	color: black;
+	color: orange;
 
 }
 
@@ -311,16 +312,16 @@ hr.post-separator {
 
 #tag-filter .form-controls input {
 	text-transform: uppercase;
-	background: white;
+	background: orange;
 	padding: 2px 1em;
-	color: orange;
-	border: 0px solid white;
+	color: white;
+	border: 0px orange;
 	margin: 0;
 }
 
 #tag-filter .form-controls input[type="reset"] {
-	background: #333333;
-	color: white;
+	background: white;
+	color: #333333;
 	margin: 0;
 }
 
@@ -341,7 +342,7 @@ hr.post-separator {
 }
 
 .blokken-footer a {
-	color: orange;
+	color: rgb (51, 51, 51);
 	font-style: italic;
 	font-weight: 600;
 }
