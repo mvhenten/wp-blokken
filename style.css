@@ -266,7 +266,7 @@ hr.post-separator {
 	line-height: 1.6em;
 	cursor: pointer;
 	float: left;
-	width: 30%;
+	width: 22%;
 	color: rgb(112, 128, 144);
 	font-weight: normal;
 
@@ -347,3 +347,16 @@ hr.post-separator {
 	font-weight: 600;
 }
 
+.clear {
+	clear: both;
+}
+
+.fix-wrapper {
+	height: 100px;
+	position: relative;
+}
+
+.fixed {
+	width: 220px;
+	position: fixed;
+}

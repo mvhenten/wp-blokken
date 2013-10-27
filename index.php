@@ -45,14 +45,16 @@ get_header(); ?>
 
 <div class="layout-container" id="content">
     <div class="col col-25">
-        <div class="col-pad-right">
-            <?php dynamic_sidebar( 'sidebar-2' ); ?>
-            <form role="search" method="get" class="blokken-search" action="/">
-				<div>
-					<input class="input-text" type="text" value="" name="s" id="s" placeholder="Search. then hit enter.">
-					<input class="input-submit" type="submit" value="Search">
-				</div>
-			</form>
+        <div class="col-pad-right fix-wrapper">
+			<div class="fixed">
+				<?php dynamic_sidebar( 'sidebar-2' ); ?>
+				<form role="search" method="get" class="blokken-search" action="/">
+					<div>
+						<input class="input-text" type="text" value="" name="s" id="s" placeholder="Search. then hit enter.">
+						<input class="input-submit" type="submit" value="Search">
+					</div>
+				</form>
+			</div>
         </div>
     </div>
 
@@ -70,12 +72,12 @@ get_header(); ?>
         <?php if ( have_posts() ) : ?>
             <?php /* The loop */ ?>
             <?php if( ! ( is_single() || is_page() ) ): ?>
-            <div class="col col-70">
+            <div class="col col-100">
                 <div id="tag-filter">
                     <?php $tags = get_tags(); ?>
-                    <form method="get">
+                    <form id="tag-filter" method="get">
                         <fieldset>
-                            <legend><span onclick="$('.form-body,.form-controls').toggle()" area-hidden="true" class="toggle-display">hide</span> category filter</legend>
+                            <legend><span onclick="$('.form-body,.form-controls').toggle(); _toggleText( this, 'hide','show')" area-hidden="true" class="toggle-display">hide</span> category filter</legend>
                             <div class="form-body">
                             <?php
                                 $checked = isset( $_GET['tag'] ) ? explode(',', $_GET['tag'] ) : array();
@@ -94,9 +96,26 @@ get_header(); ?>
                             </div>
                         </fieldset>
                         <input id="filter-tags" value="" name="tag" type="hidden" />
+						<script>
+							function _toggleText( el, a, b ) {
+								if ( $(el).text() == a ) $(el).html(b);
+								else $(el).html(a);
+							}
+
+							$(document).ready(function(){
+								function _fadeControls() {
+									var len = $('#tag-filter form').serializeArray()[0].value.length;
+									$('#tag-filter .form-controls').fadeTo( 400, 0 < len ? 1 : 0.5 );
+								}
+
+								$('#tag-filter input').click( _fadeControls );
+								_fadeControls();
+							});
+						</script>
                     </form>
                 </div>
             </div>
+			<div class="clear" ></div>
             <?php endif; ?>
             <?php while ( have_posts() ) : the_post(); ?>
                 <?php $type = get_post_type( get_the_ID() ); ?>
@@ -112,16 +131,10 @@ get_header(); ?>
                             <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
                         </h4>
 
-                        <?php if ( is_search() ) : // Only display Excerpts for Search ?>
-							<div class="entry-summary">
-								<?php the_excerpt(); ?>
-							</div><!-- .entry-summary -->
-                        <?php else : ?>
-							<div class="entry-content">
-								<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
-								<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
-							</div><!-- .entry-content -->
-                        <?php endif; ?>
+						<div class="entry-content">
+							<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'blokken' ) ); ?>
+							<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'blokken' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
+						</div><!-- .entry-content -->
                     <?php endif;?>
                     </div>
 					<?php if( is_single() ): ?>
@@ -135,7 +148,6 @@ get_header(); ?>
                 <div class="col col-30">
                     <div class="col-pad-left post-meta">
                         <div class="date">
-                            <?php echo get_the_date(); ?>
 							<?php $count = get_comments_number() ?>
 							<?php if( $count ): ?>
 								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php $count == 1 ? printf('%d comment', $count ) :printf('%d comments', $count ) ?></a>
@@ -155,8 +167,5 @@ get_header(); ?>
         <?php endif; ?>
     </div>
 </div>
-
-<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-
 
 <?php get_footer(); ?>
