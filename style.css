@@ -87,7 +87,7 @@ h4 {
 /** end layout **/
 
 .blokken-search input {
-	color: orange;
+	color: black;
 	display: block;
 	border: 1px solid white;
 	text-transform: uppercase;
@@ -129,8 +129,8 @@ hr.post-separator {
 }
 
 .post-meta .post-tag-list a {
-	color: rgb(112, 128, 144);
-	font-weight: 600;
+	color: gray;
+	font-weight: normal;
 }
 
 .post-meta .post-tag-list {
@@ -267,7 +267,7 @@ hr.post-separator {
 	cursor: pointer;
 	float: left;
 	width: 22%;
-	color: rgb(112, 128, 144);
+	color: gray;
 	font-weight: normal;
 
 	margin-left: 3%;
