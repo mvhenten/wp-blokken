@@ -105,10 +105,11 @@ get_header(); ?>
 							$(document).ready(function(){
 								function _fadeControls() {
 									var len = $('#tag-filter form').serializeArray()[0].value.length;
+
 									$('#tag-filter .form-controls').fadeTo( 400, 0 < len ? 1 : 0.5 );
 								}
 
-								$('#tag-filter input').click( _fadeControls );
+								$('#tag-filter input').change( _fadeControls );
 								_fadeControls();
 							});
 						</script>
@@ -121,7 +122,19 @@ get_header(); ?>
                 <?php $type = get_post_type( get_the_ID() ); ?>
 
                 <div class="col col-70">
-                    <div class="entry">
+					<?php
+						$categories = get_the_category();
+
+						$cats = array();
+						foreach( $categories as $cat ){
+							$cats[] = $cat->name;
+						}
+						$meta = get_post_meta( get_the_ID(), 'hotglue', true );
+					?>
+                    <div class="entry <?php echo $meta ? 'hotglue' : '' ?>">
+					<?php if( $meta ): ?>
+					<a class="hotglue-link" title="edit me in hotglue" href="<?php echo $meta ?>">edit me in hotglue</a>
+					<?php endif; ?>
                     <?php if( $type == 'blokken_quote' ): ?>
                         <div class="quote">
                             <h4 class="entry-title"><a target="_blank" href="<?php echo get_post_meta( get_the_ID(), '_blokken_quote_link', true ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>

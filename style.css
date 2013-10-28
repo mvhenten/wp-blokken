@@ -360,3 +360,24 @@ hr.post-separator {
 	width: 220px;
 	position: fixed;
 }
+
+.hotglue-link {
+	display: none;
+}
+
+.entry.hotglue {
+	position: relative;
+}
+
+.entry.hotglue .hotglue-link {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 87px;
+	height: 87px;
+	top: 0;
+	right: 0;
+	text-indent: -999px;
+	overflow:hidden;
+	background: url('css/hotglue.png') no-repeat top right;
+}
