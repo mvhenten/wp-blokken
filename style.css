@@ -381,3 +381,9 @@ hr.post-separator {
 	overflow:hidden;
 	background: url('css/hotglue.png') no-repeat top right;
 }
+
+.comment-link {
+	display: block;
+	padding-left: 30px;
+	background: url('css/balloon.png') no-repeat top left;
+}

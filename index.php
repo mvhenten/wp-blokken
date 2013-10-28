@@ -163,9 +163,9 @@ get_header(); ?>
                         <div class="date">
 							<?php $count = get_comments_number() ?>
 							<?php if( $count ): ?>
-								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php $count == 1 ? printf('%d comment', $count ) :printf('%d comments', $count ) ?></a>
+								<a class="comment-link" href="<?php the_permalink(); ?>" rel="bookmark"><?php $count == 1 ? printf('%d comment', $count ) :printf('%d comments', $count ) ?></a>
 							<?php else: ?>
-								<a href="<?php the_permalink(); ?>" rel="bookmark">comment</a>
+								<a class="comment-link" href="<?php the_permalink(); ?>" rel="bookmark">comment</a>
 							<?php endif; ?>
                         </div>
                         <div class="post-tag-list">
