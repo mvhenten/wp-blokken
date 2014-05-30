@@ -54,6 +54,12 @@ get_header(); ?>
 						<input class="input-submit" type="submit" value="Search">
 					</div>
 				</form>
+				<div class="social-links">
+					<h5>Follow</h5>
+					<a class="facebook-link" target="blank" href="https://www.facebook.com/IDENTITYisCOMPLEXITYisWEALTH">via facebook</a>
+					<a class="twitter-link" target="blank" href="https://twitter.com/StudioICW">via twitter</a>
+					<a class="e-mail-link" target="blank" href="mailto:info@jonmarvanvlijmen.com">via e-mail</a>
+				</div>
 			</div>
         </div>
     </div>
@@ -133,7 +139,7 @@ get_header(); ?>
 					?>
                     <div class="entry <?php echo $meta ? 'hotglue' : '' ?>">
 					<?php if( $meta ): ?>
-					<a class="hotglue-link" title="edit me in hotglue" href="<?php echo $meta ?>">edit me in hotglue</a>
+					<a class="hotglue-link" target="blank" title="edit me in hotglue" href="<?php echo $meta ?>">edit me in hotglue</a>
 					<?php endif; ?>
                     <?php if( $type == 'blokken_quote' ): ?>
                         <div class="quote">
@@ -180,5 +186,6 @@ get_header(); ?>
         <?php endif; ?>
     </div>
 </div>
+<canvas id="cnv" width="155" height="40" style="display:none; border: 1px solid red;" />
 
 <?php get_footer(); ?>

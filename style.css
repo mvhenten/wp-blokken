@@ -98,6 +98,32 @@ h4 {
 
 }
 
+
+	.social-links {
+	margin-top: 45px;
+
+}
+
+.facebook-link {
+	display: block;
+	padding: 10px 10px 10px 40px;
+	background: url('css/facebook-black.png') no-repeat top left;
+}
+
+
+.twitter-link {
+	display: block;
+	padding: 10px 10px 10px 40px;
+	background: url('css/twitter-black.png') no-repeat top left;
+}
+
+.e-mail-link {
+	display: block;
+	padding: 10px 10px 10px 40px;
+	background: url('css/email-black.png') no-repeat top left;
+}
+
+
 .blokken-search .input-submit {
 	display:none;
 }
@@ -326,7 +352,7 @@ hr.post-separator {
 }
 
 .entry-content a {
-	color: rgb(112, 128, 144);
+	color: white;
 	font-weight: 600;
 }
 
